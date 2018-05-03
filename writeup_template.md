@@ -190,9 +190,9 @@ partial_dx = np.round((2*line_fit[0]*fitx[0])+(2*line_fit[1]*self.ploty[0]), 2)
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+I implemented this in Step 5.6 of the IPython notebook located in "./Advanced-Lane-Lines.ipynb" in the function `find_lane()` and `draw_vehicle_dashboard()` function to draw dashboard for indicating related information. Here is an example of my result on a test image:
 
-![alt text][image6]
+![final_result](./images/final_result.jpg)
 
 ---
 
