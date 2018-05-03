@@ -64,7 +64,12 @@ I apply the distortion correction to the test image the result look like this on
 
 At Step 5.2 of the IPython notebook, I used a combination of color and gradient thresholds to generate a binary image.  Here's an example of my output for this step.  
 
-![alt text][image3]
+![s_binary_img](./images/s_binary_img.jpg)
+![sx_binary_img](./images/sx_binary_img.jpg)
+![sy_binary_img](./images/sy_binary_img.jpg)
+![mag_binary_img](./images/mag_binary_img.jpg)
+![dir_binary_img](./images/dir_binary_img.jpg)
+![final_binary_img](./images/final_binary_img.jpg)
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
