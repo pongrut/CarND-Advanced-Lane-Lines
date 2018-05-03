@@ -147,9 +147,9 @@ The Step 5.4 [block #1], I started by selecting the region of interest by color 
 The Step 5.4 [block #2], I search for the histogram peaks to get the basex position of both left & right.
 ![peaks_hist](./images/peaks_hist.jpg)
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+The Step 5.4 [block #3], Then I used the `sliding_search ()` function to detect and store the white pixels in the left and right base_x guides. And use position of white pixels and fit my lane lines with a polynomial 2nd order kinda like this:
 
-![alt text][image5]
+![fitx_line](./images/fitx_line.jpg)
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
