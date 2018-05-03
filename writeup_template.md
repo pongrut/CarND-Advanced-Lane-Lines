@@ -1,6 +1,8 @@
-## Writeup Template
+# **Advanced Lane** 
+---
 
-### You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
+Pongrut Palarpong  
+May 03, 2018
 
 ---
 
@@ -190,7 +192,7 @@ partial_dx = np.round((2*line_fit[0]*fitx[0])+(2*line_fit[1]*self.ploty[0]), 2)
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this in Step 5.6 of the IPython notebook located in "./Advanced-Lane-Lines.ipynb" in the function `find_lane()` and `draw_vehicle_dashboard()` function to draw dashboard for indicating related information.The bottom of the image shows the distance between the center of the image and the center of the lane. The circle gauge at the top right shows the radius of curvature in kilometers. The edge of the circle shows the direction of the curve in the left or right. The color of the circle indicates the speed of the circle. If the green is able to use up to about 80 mph, yellow is 65 mph and red is 55 mph. [Horizontal Curvature of High-Speed Highways and Connecting Roadways with Superelevation]
+I implemented this in Step 5.6 of the IPython notebook located in "./Advanced-Lane-Lines.ipynb" in the function `find_lane()` and `draw_vehicle_dashboard()` function to draw dashboard for indicating related information.The bottom of the image shows the distance between the center of the image and the center of the lane. The circle gauge at the top right shows the radius of curvature in kilometers. The edge of the circle shows the direction of the curve in the left or right. The color of the circle indicates the speed of the circle. If the green is able to use up to about 80 mph, yellow is 65 mph and red is 55 mph. [Horizontal Curvature of High-Speed Highways and Connecting Roadways with Superelevation](http://onlinemanuals.txdot.gov/txdotmanuals/rdw/horizontal_alignment.htm#BGBHGEGC)<br/>
 Here is an example of my result on a test image:
 
 ![final_result](./images/final_result.jpg)
