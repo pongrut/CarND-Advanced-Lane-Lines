@@ -147,7 +147,7 @@ The Step 5.4 [block #1], I started by selecting the region of interest by color 
 The Step 5.4 [block #2], I search for the histogram peaks to get the basex position of both left & right.
 ![peaks_hist](./images/peaks_hist.jpg)
 
-The Step 5.4 [block #3], Then I used the `sliding_search ()` function to detect and store the white pixels in the left and right base_x guides. And use position of white pixels and fit my lane lines with a polynomial 2nd order kinda like this:
+The Step 5.4 [block #3], Then I used the `sliding_search ()` function to detect and store the white pixels in the left and right base_x guides. And use position of these white pixels and fit my lane lines with a polynomial 2nd order kinda like this:
 
 ![fitx_line](./images/fitx_line.jpg)
 
