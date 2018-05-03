@@ -153,6 +153,44 @@ The Step 5.4 [block #3], Then I used the `sliding_search ()` function to detect 
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
+### Radius of Curvature
+\begin{equation*}
+R_{curve} = \frac{(1+(2Ay+B)^2)^{\frac{3}{2}}}{\mid2A\mid}
+\end{equation*}
+
+### Partial Derivative of a quadratic form
+\begin{equation*}
+\frac{\partial (x'Ax+2y'B'x+y'Cy)}{\partial x}=2(Ax+By)
+\end{equation*}
+
+```
+def get_radius_curv(self, fitx):
+    """Helper function to calculate new polynomials fit in meter-based (world space).
+
+    """
+    line_fit_cr = np.polyfit(self.ploty*self.ym_per_pix, fitx*self.xm_per_pix, 2)
+    return line_fit_cr
+
+def get_best_radius(self):
+    """Helper function to calculate and return average radius of curvature.
+
+    """
+    return np.mean(self.radius_of_curvature.get())
+```   
+
+```
+# calculate the best fit of second order polynomial in meter based.
+line_fit_cr = self.get_radius_curv(fitx)
+# calulate current radious of curvature in meter based.
+current_radius_of_cur = ((1 + (2*line_fit_cr[0]*y_eval*self.ym_per_pix + \
+                                     line_fit_cr[1])**2)**1.5) / np.absolute(2*line_fit_cr[0])
+# update new radious of curvature value.
+self.update_radius(current_radius_of_cur)
+# calculate the partial derivative at x min and y=0 >> 2*(A*x + B*y) 
+# note: https://math.stackexchange.com/questions/1845877/partial-derivative-of-a-quadratic-form
+partial_dx = np.round((2*line_fit[0]*fitx[0])+(2*line_fit[1]*self.ploty[0]), 2)
+```
+
 I did this in lines # through # in my code in `my_other_file.py`
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
