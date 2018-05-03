@@ -140,6 +140,13 @@ I verified that my perspective transform was working as expected by drawing the 
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
+The Step 5.4 [block #1], I started by selecting the region of interest by color filtering and then load the default src & dst parameters for passing to `perspective_trans ()` function. After I got  wraped image (top view) then I used this image to go through the binary transformation process. The last step is to  trim 50 pixels at left & right edges.
+![per_img](./images/per_img.jpg)
+![binary_wraped_img](./images/binary_wraped_img.jpg)
+
+The Step 5.4 [block #2], I search for the histogram peaks to get the basex position of both left & right.
+![peaks_hist](./images/peaks_hist.jpg)
+
 Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
 
 ![alt text][image5]
