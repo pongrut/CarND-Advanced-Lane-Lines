@@ -56,12 +56,13 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 #### 1. Provide an example of a distortion-corrected image.
 
-To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
+This step uses the load calibration coefficients that were generated during camera calibration to do distortion correction.
+I apply the distortion correction to the test image the result look like this one which the code is in Step 5.1 of the IPython notebook:
 ![undistort](./images/undistort.jpg)
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
+At Step 5.2 of the IPython notebook, I used a combination of color and gradient thresholds to generate a binary image.  Here's an example of my output for this step.  
 
 ![alt text][image3]
 
