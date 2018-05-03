@@ -73,33 +73,70 @@ At Step 5.2 of the IPython notebook, I used a combination of color and gradient 
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-The code for my perspective transform includes a function called `warper()`, which appears in lines 1 through 8 in the file `example.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+The code for my perspective transform includes a function called `per_trans_calibrate() and perspective_trans()`, which appears in Step 5.3 in the IPython notebook).  The `per_trans_calibrate()` function to automatically find perspective transformation parameters as a starting points then I can manually finetune the source and destination parameters.
+
+The `per_trans_calibrate()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points. I chose the hardcode the source and destination points in the following values:
 
 ```python
-src = np.float32(
-    [[(img_size[0] / 2) - 55, img_size[1] / 2 + 100],
-    [((img_size[0] / 6) - 10), img_size[1]],
-    [(img_size[0] * 5 / 6) + 60, img_size[1]],
-    [(img_size[0] / 2 + 55), img_size[1] / 2 + 100]])
-dst = np.float32(
-    [[(img_size[0] / 4), 0],
-    [(img_size[0] / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), 0]])
+def find_perspective_dst(self, best_lines, offset=200):
+    """Function to calculate perspective transformation source & destination parameters.
+
+      Args:
+        best_lines (array): two best lines for automatically finding src & dst points.
+        offset (int)      : offset pixels of x axis.
+
+      Return:
+        src (array)       : source parameter.
+        dst (array)       : destination parameter.
+    """    
+    # extract points of first line.
+    # bottom left point of first line.
+    bl1 = best_lines[0][np.argmin(best_lines[0][0])]
+    # top left point of first line.
+    tl1 = best_lines[0][np.argmax(best_lines[0][0])]
+    # top right point of second line.
+    tr1 = best_lines[1][np.argmin(best_lines[1][0])]
+    # bottom right point of second line.
+    br1 = best_lines[1][np.argmax(best_lines[1][0])]
+    # generate src points from hough lines.
+    src = np.float32([bl1, tl1, tr1, br1])
+    # extract x & y data.
+    xs = best_lines[:,:,0]
+    ys = best_lines[:,:,1]
+    # find minimum point in x axis.
+    left = xs.min()
+    # find maximum point in x axis.
+    right = xs.max()
+    # define top destination at zero.
+    top = 0
+    # find maximum point in y axis.
+    buttom = ys.max()
+    # generate dst points.
+    bl2 = (left+offset, buttom)
+    tl2 = (left+offset, top)
+    tr2 = (right-offset, top)
+    br2 = (right-offset, buttom) 
+    dst = np.float32([bl2, tl2, tr2, br2])
+    return src, dst
+        
+# predefined perspective transformation source parameter.
+self.default_src = np.float32([(203, 720), (571, 468), (711, 468), (1109, 720)])
+# predefined perspective transformation destination parameter.
+self.default_dst = np.float32([(318, 720), (318, 0), (994, 0), (994, 720)])
 ```
 
 This resulted in the following source and destination points:
 
 | Source        | Destination   | 
 |:-------------:|:-------------:| 
-| 585, 460      | 320, 0        | 
-| 203, 720      | 320, 720      |
-| 1127, 720     | 960, 720      |
-| 695, 460      | 960, 0        |
+| 203, 720      | 318, 720      | 
+| 571, 468      | 318, 0        |
+| 711, 468      | 994, 0        |
+| 1109, 720     | 994, 720      |
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 
-![alt text][image4]
+![wraped_img](./images/wraped_img.jpg)
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
