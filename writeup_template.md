@@ -153,15 +153,7 @@ The Step 5.4 [block #3], Then I used the `sliding_search ()` function to detect 
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-### Radius of Curvature
-\begin{equation*}
-R_{curve} = \frac{(1+(2Ay+B)^2)^{\frac{3}{2}}}{\mid2A\mid}
-\end{equation*}
-
-### Partial Derivative of a quadratic form
-\begin{equation*}
-\frac{\partial (x'Ax+2y'B'x+y'Cy)}{\partial x}=2(Ax+By)
-\end{equation*}
+![equations](./images/equations.jpg)
 
 ```
 def get_radius_curv(self, fitx):
