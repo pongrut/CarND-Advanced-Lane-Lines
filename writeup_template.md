@@ -155,6 +155,8 @@ The Step 5.4 [block #3], Then I used the `sliding_search ()` function to detect 
 
 ![equations](./images/equations.jpg)
 
+In Step 2 `Line ()` Class I have `get_radius_curv ()` to convert the polynomial of the pixel unit to meter unit and `get best radius ()` to find the average of the last 6 radius of curvature.
+
 ```
 def get_radius_curv(self, fitx):
     """Helper function to calculate new polynomials fit in meter-based (world space).
@@ -170,6 +172,7 @@ def get_best_radius(self):
     return np.mean(self.radius_of_curvature.get())
 ```   
 
+Code block below shows, how I calculate recent radius of curvature and partial derivative to find x direction. 
 ```
 # calculate the best fit of second order polynomial in meter based.
 line_fit_cr = self.get_radius_curv(fitx)
@@ -183,7 +186,7 @@ self.update_radius(current_radius_of_cur)
 partial_dx = np.round((2*line_fit[0]*fitx[0])+(2*line_fit[1]*self.ploty[0]), 2)
 ```
 
-I did this in lines # through # in my code in `my_other_file.py`
+
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
