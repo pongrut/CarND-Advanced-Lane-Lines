@@ -2,7 +2,7 @@
 ---
 
 Pongrut Palarpong  
-May 03, 2018
+May 04, 2018
 
 ---
 
@@ -212,4 +212,6 @@ Here's a [link to my video result](./project_video_out.mp4)<br/>
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+The approach I took for detecting lane areas on the road is the steps described above. What important is that I tried to eliminate noise as much as possible by using color selection and adaptive histogram equalization as well as a Gaussian blur in many steps. After that, the significant step is to find the right base_x. I have used `Find_peaks_cwt ()` to detect potential peaks instead of finding the highest peaks. In some cases with very high noise, highest peaks may create fault detection. I also verified the potential peaks with the normal width of left and right lines must be for final best base_x. In the last step, I record the points from `sliding_search ()` of the last five frames and brings these all x and y points to fit the lane lines with a polynomial 2nd order. This method will help collect missing pieces and make predicting the result is more robust.
+
+However, all the methods described are still limited. Since the detection algorithm depends on the condition of the lighting, colors. For example, the shadows of a building or a bridge on the road may cause a fault detection. To be able to make detection is more robust, I may need to add an algorithm to identify these noises e.g. measuring the thickness of the lane, ignore to record invalid x and y points. But the way to be effective is to use the convolutional neural network to detect lane areas.
