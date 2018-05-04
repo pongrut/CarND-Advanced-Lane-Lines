@@ -17,15 +17,6 @@ The goals / steps of this project are the following:
 * Warp the detected lane boundaries back onto the original image.
 * Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 
-[//]: # (Image References)
-
-[image1]: ./examples/undistort_output.png "Undistorted"
-[image2]: ./test_images/test1.jpg "Road Transformed"
-[image3]: ./examples/binary_combo_example.jpg "Binary Example"
-[image4]: ./examples/warped_straight_lines.jpg "Warp Example"
-[image5]: ./examples/color_fit_lines.jpg "Fit Visual"
-[image6]: ./examples/example_output.jpg "Output"
-[video1]: ./project_video.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
 
@@ -44,7 +35,7 @@ I start by preparing "object points" , which will be the (x, y, z) coordinates o
 
 I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result: 
 
-![cam_calibration](./images/cam_calibration.jpg)
+![cam_calibration](./output_images/cam_calibration.jpg)
 
 
 ### Pipeline (single images)
@@ -53,19 +44,19 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 This step uses the load calibration coefficients that were generated during camera calibration to do distortion correction.
 I apply the distortion correction to the test image the result looks like this one which the code is in Step 5.1 of the IPython notebook:
-![undistort](./images/undistort.jpg)
+![undistort](./output_images/undistort.jpg)
 
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
 At Step 5.2 of the IPython notebook, I used a combination of color and gradient thresholds to generate a binary image.  Here's an example of my output for this step.  
 
-![s_binary_img](./images/s_binary_img.jpg)
-![sx_binary_img](./images/sx_binary_img.jpg)
-![sy_binary_img](./images/sy_binary_img.jpg)
-![mag_binary_img](./images/mag_binary_img.jpg)
-![dir_binary_img](./images/dir_binary_img.jpg)
-![final_binary_img](./images/final_binary_img.jpg)
+![s_binary_img](./output_images/s_binary_img.jpg)
+![sx_binary_img](./output_images/sx_binary_img.jpg)
+![sy_binary_img](./output_images/sy_binary_img.jpg)
+![mag_binary_img](./output_images/mag_binary_img.jpg)
+![dir_binary_img](./output_images/dir_binary_img.jpg)
+![final_binary_img](./output_images/final_binary_img.jpg)
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provided an example of a transformed image.
 
@@ -132,24 +123,24 @@ The resulted parameters are in the below source and destination points:
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 
-![wraped_img](./images/wraped_img.jpg)
+![wraped_img](./output_images/wraped_img.jpg)
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
 The Step 5.4 [block #1], I started by selecting the region of interest by color filtering and then load the default src & dst parameters for passing to `perspective_trans ()` function. After I got wraped image (top view), then I used this image to go through the binary transformation process. The last step is to  trim 50 pixels at left & right edges.
-![per_img](./images/per_img.jpg)
-![binary_wraped_img](./images/binary_wraped_img.jpg)
+![per_img](./output_images/per_img.jpg)
+![binary_wraped_img](./output_images/binary_wraped_img.jpg)
 
 The Step 5.4 [block #2], I search for the histogram peaks to get the base_x position of both left & right.
-![peaks_hist](./images/peaks_hist.jpg)
+![peaks_hist](./output_images/peaks_hist.jpg)
 
 The Step 5.4 [block #3], Then I used the `sliding_search ()` function to detect and store the white pixels in the left and right base_x guides. And use the position of these white pixels and fit my lane lines with a polynomial 2nd order kind of like this:
 
-![fitx_line](./images/fitx_line.jpg)
+![fitx_line](./output_images/fitx_line.jpg)
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-![equations](./images/equations.jpg)
+![equations](./output_images/equations.jpg)
 
 In Step 2 `Line ()` Class I have `get_radius_curv ()` to convert the polynomial of the pixel unit to meter unit and `get best radius ()` to find the average of the last 6 radius of curvature.
 
@@ -189,7 +180,7 @@ partial_dx = np.round((2*line_fit[0]*fitx[0])+(2*line_fit[1]*self.ploty[0]), 2)
 I implemented this in Step 5.6 of the IPython notebook located in "./Advanced-Lane-Lines.ipynb" in the function `find_lane()` and `draw_vehicle_dashboard()` function to draw dashboard for indicating related information.The bottom of the image shows the distance between the center of the image and the center of the lane. The circle gauge at the top right shows the radius of curvature in kilometers. The edge of the circle shows the direction of the curve in the left or right. The color of the circle indicates the speed of the circle. If the green can use speed up to about 80 mph, yellow is 65 mph, and red is 55 mph. [Horizontal Curvature of High-Speed Highways and Connecting Roadways with Superelevation](http://onlinemanuals.txdot.gov/txdotmanuals/rdw/horizontal_alignment.htm#BGBHGEGC)<br/>
 Here is an example of my result on a test image:
 
-![final_result](./images/final_result.jpg)
+![final_result](./output_images/final_result.jpg)
 
 ---
 
